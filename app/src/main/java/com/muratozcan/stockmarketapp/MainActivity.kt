@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -16,9 +17,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.muratozcan.stockmarketapp.screens.LoginPage
 import com.muratozcan.stockmarketapp.screens.RegisterPage
+import com.muratozcan.stockmarketapp.screens.StockPage
+import com.muratozcan.stockmarketapp.screens.StockViewModel
 import com.muratozcan.stockmarketapp.ui.theme.StockMarketAppTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val stockViewModel: StockViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
@@ -36,6 +41,7 @@ class MainActivity : ComponentActivity() {
         NavHost(navController = navController, startDestination = "login_page", builder = {
             composable("login_page", content = { LoginPage(navController = navController) })
             composable("register_page", content = { RegisterPage(navController = navController) })
+            composable("stock_page", content = { StockPage(navController = navController, viewModel = stockViewModel) })
         })
     }
 }

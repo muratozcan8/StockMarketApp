@@ -108,19 +108,13 @@ fun LoginPage(navController: NavController) {
 
 
                 Spacer(modifier = Modifier.padding(10.dp))
-                /* Button(
-                     onClick = {},
-                     modifier = Modifier
-                         .fillMaxWidth(0.8f)
-                         .height(50.dp)
-                 ) {
-                     Text(text = "Login", fontSize = 20.sp)
-                 }*/
+
                 GradientButton(
                     gradientColors = gradientColor,
                     cornerRadius = cornerRadius,
                     nameButton = "Login",
-                    roundedCornerShape = RoundedCornerShape(topStart = 30.dp,bottomEnd = 30.dp)
+                    roundedCornerShape = RoundedCornerShape(topStart = 30.dp,bottomEnd = 30.dp),
+                    navController = navController
                 )
 
                 Spacer(modifier = Modifier.padding(10.dp))
@@ -132,7 +126,7 @@ fun LoginPage(navController: NavController) {
                     }
 
                 }) {
-                    androidx.compose.material3.Text(
+                    Text(
                         text = "Create An Account",
                         letterSpacing = 1.sp,
                         style = MaterialTheme.typography.labelLarge
@@ -151,7 +145,8 @@ private fun GradientButton(
     gradientColors: List<Color>,
     cornerRadius: Dp,
     nameButton: String,
-    roundedCornerShape: RoundedCornerShape
+    roundedCornerShape: RoundedCornerShape,
+    navController: NavController
 ) {
 
     androidx.compose.material3.Button(
@@ -159,7 +154,10 @@ private fun GradientButton(
             .fillMaxWidth()
             .padding(start = 32.dp, end = 32.dp),
         onClick = {
-            //your code
+            navController.navigate("stock_page"){
+                popUpTo(navController.graph.startDestinationId)
+                launchSingleTop = true
+            }
         },
 
         contentPadding = PaddingValues(),
