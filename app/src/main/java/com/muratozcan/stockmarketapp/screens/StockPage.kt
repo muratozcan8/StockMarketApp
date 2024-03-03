@@ -91,7 +91,6 @@ fun StockPage(navController: NavController, viewModel: StockViewModel = viewMode
                     CircularProgressIndicator(color = Color.Black)
                 }
                 Log.e("Null", "null")
-                viewModel.getAllStocks()
             }
         }
     }

@@ -1,9 +1,10 @@
 package com.muratozcan.stockmarketapp.network
 
-import com.muratozcan.stockmarketapp.models.Login
-import com.muratozcan.stockmarketapp.models.SignUp
+import com.muratozcan.stockmarketapp.models.CRUDResponse
 import com.muratozcan.stockmarketapp.models.Stock
+import com.muratozcan.stockmarketapp.models.UserDTO
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -13,13 +14,13 @@ interface Api {
 
     @POST("api/users/login")
     suspend fun login(
-        @Query("q") query: String
-    ): Response<Login>
+        @Body query: String
+    ): Response<CRUDResponse>
 
     @POST("api/users/register")
     suspend fun register(
-        @Query("q") query: String
-    ): Response<SignUp>
+        @Body user: UserDTO
+    ): Response<CRUDResponse>
 
     @GET("api/stocks/{id}")
     suspend fun getStock(
