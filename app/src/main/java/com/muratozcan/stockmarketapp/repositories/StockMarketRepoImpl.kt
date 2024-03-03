@@ -4,13 +4,16 @@ import com.muratozcan.stockmarketapp.models.BaseModel
 import com.muratozcan.stockmarketapp.models.CRUDResponse
 import com.muratozcan.stockmarketapp.models.Stock
 import com.muratozcan.stockmarketapp.models.UserDTO
+import com.muratozcan.stockmarketapp.models.UserLogin
 import com.muratozcan.stockmarketapp.network.Api
+import org.json.JSONObject
 import retrofit2.Response
+import retrofit2.http.Body
 
 class StockMarketRepoImpl(private val api: Api): StockMarketRepo {
-    override suspend fun login(query: String): BaseModel<CRUDResponse> {
+    override suspend fun login(user: UserLogin): BaseModel<CRUDResponse> {
         return request {
-            api.login(query = query)
+            api.login(user)
         }
     }
 
