@@ -17,9 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -106,7 +104,7 @@ fun Crypto(stock: Stock, horizontal: Boolean = false) {
             .clip(
                 RoundedCornerShape(8.dp)
             )
-            .background(MaterialTheme.colorScheme.primary)
+            .background(MaterialTheme.colorScheme.outline)
             .clickable { }
             .padding(horizontal = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -120,11 +118,13 @@ fun Crypto(stock: Stock, horizontal: Boolean = false) {
                 modifier = Modifier
                     .size(55.dp)
                     .clip(RoundedCornerShape(18.dp))
-                    .background(MaterialTheme.colorScheme.secondary),
+                    .background(MaterialTheme.colorScheme.outline),
                 contentAlignment = Alignment.Center
             ) {
                 AsyncImage(
-                    modifier = Modifier.size(40.dp),
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(RoundedCornerShape(5.dp)),
                     model = ImageRequest.Builder(LocalContext.current)
                         .data("http://10.0.2.2:8080/api/Images/GetImage/${stock.stockShortName}.png")
                         .crossfade(true)
@@ -134,15 +134,15 @@ fun Crypto(stock: Stock, horizontal: Boolean = false) {
             }
 
             Column {
-                Text(stock.stockName, fontWeight = FontWeight.Bold, fontSize = 14.sp)
-                Text(stock.stockShortName, fontSize = 12.sp, color = Color.Gray)
+                Text(stock.stockName, fontWeight = FontWeight.Bold, fontSize = 17.sp, color = Color.White)
+                Text(stock.stockShortName, fontSize = 13.sp, color = Color.Gray)
             }
         }
         if (horizontal) {
             Spacer(modifier = Modifier.width(10.dp))
         }
         Column(horizontalAlignment = Alignment.End) {
-            Text("${((stock.stockPrice * 100).roundToInt()) / 100.0}$")
+            Text("${((stock.stockPrice * 100).roundToInt()) / 100.0}₺")
             Spacer(modifier = Modifier.height(2.dp))
             val percent = ((stock.stockPrice * 100).roundToInt()) / 100.0
             val textColor = if (percent >= 0) Green else Red
