@@ -3,6 +3,7 @@ package com.muratozcan.stockmarketapp.repositories
 import com.muratozcan.stockmarketapp.models.BaseModel
 import com.muratozcan.stockmarketapp.models.CRUDResponse
 import com.muratozcan.stockmarketapp.models.Stock
+import com.muratozcan.stockmarketapp.models.StockPrice
 import com.muratozcan.stockmarketapp.models.UserDTO
 import com.muratozcan.stockmarketapp.models.UserLogin
 import com.muratozcan.stockmarketapp.network.Api
@@ -34,6 +35,31 @@ class StockMarketRepoImpl(private val api: Api): StockMarketRepo {
             api.getAllStocks()
         }
     }
+
+    override suspend fun getStockPrice1Week(stockId: Int): BaseModel<StockPrice> {
+        return request {
+            api.getPrediction1Week(stockId)
+        }
+    }
+
+    override suspend fun getStockPrice1Month(stockId: Int): BaseModel<StockPrice> {
+        return request {
+            api.getPrediction1Month(stockId)
+        }
+    }
+
+    override suspend fun getStockPrice3Month(stockId: Int): BaseModel<StockPrice> {
+        return request {
+            api.getPrediction3Month(stockId)
+        }
+    }
+
+    override suspend fun getStockPrice6Month(stockId: Int): BaseModel<StockPrice> {
+        return request {
+            api.getPrediction6Month(stockId)
+        }
+    }
+
 
 }
 

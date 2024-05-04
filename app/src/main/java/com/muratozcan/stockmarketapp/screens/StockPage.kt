@@ -43,6 +43,7 @@ import com.muratozcan.stockmarketapp.models.BaseModel
 import com.muratozcan.stockmarketapp.models.Stock
 import kotlin.math.roundToInt
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.navArgument
 import kotlinx.coroutines.delay
 
 @Composable
@@ -74,7 +75,7 @@ fun StockPage(navController: NavController, viewModel: StockViewModel = viewMode
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)){
                     items(result.data){
                         val stock = it
-                        Crypto(stock = stock)
+                        Crypto(stock = stock, navController = navController)
                     }
                 }
             }
@@ -95,7 +96,7 @@ fun StockPage(navController: NavController, viewModel: StockViewModel = viewMode
 }
 
 @Composable
-fun Crypto(stock: Stock, horizontal: Boolean = false) {
+fun Crypto(stock: Stock, horizontal: Boolean = false, navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -104,8 +105,11 @@ fun Crypto(stock: Stock, horizontal: Boolean = false) {
             .clip(
                 RoundedCornerShape(8.dp)
             )
+            .clickable {
+                navController.navigate("stock_detail_page/${stock.stockId}/${stock.stockName}"){
+                }
+            }
             .background(MaterialTheme.colorScheme.outline)
-            .clickable { }
             .padding(horizontal = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -123,7 +127,7 @@ fun Crypto(stock: Stock, horizontal: Boolean = false) {
             ) {
                 AsyncImage(
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(45.dp)
                         .clip(RoundedCornerShape(5.dp)),
                     model = ImageRequest.Builder(LocalContext.current)
                         .data("http://10.0.2.2:8080/api/Images/GetImage/${stock.stockShortName}.png")
@@ -135,7 +139,7 @@ fun Crypto(stock: Stock, horizontal: Boolean = false) {
 
             Column {
                 Text(stock.stockName, fontWeight = FontWeight.Bold, fontSize = 17.sp, color = Color.White)
-                Text(stock.stockShortName, fontSize = 13.sp, color = Color.Gray)
+                Text(stock.stockShortName, fontSize = 14.sp, color = Color.Gray)
             }
         }
         if (horizontal) {

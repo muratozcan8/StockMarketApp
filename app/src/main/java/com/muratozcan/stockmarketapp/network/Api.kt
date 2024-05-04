@@ -2,6 +2,7 @@ package com.muratozcan.stockmarketapp.network
 
 import com.muratozcan.stockmarketapp.models.CRUDResponse
 import com.muratozcan.stockmarketapp.models.Stock
+import com.muratozcan.stockmarketapp.models.StockPrice
 import com.muratozcan.stockmarketapp.models.UserDTO
 import com.muratozcan.stockmarketapp.models.UserLogin
 import retrofit2.Response
@@ -33,8 +34,23 @@ interface Api {
     @GET("api/stocks")
     suspend fun getAllStocks(): Response<List<Stock>>
 
-    @GET("api/Images/GetImage/{FilePath}.png")
-    suspend fun getStockImage(
-        @Path("FilePath") filePath: String
-    )
+    @GET("api/prediction1week/{id}")
+    suspend fun getPrediction1Week(
+        @Path("id") stockId: Int
+    ): Response<StockPrice>
+
+    @GET("api/prediction1month/{id}")
+    suspend fun getPrediction1Month(
+        @Path("id") stockId: Int
+    ): Response<StockPrice>
+
+    @GET("api/prediction3month/{id}")
+    suspend fun getPrediction3Month(
+        @Path("id") stockId: Int
+    ): Response<StockPrice>
+
+    @GET("api/prediction6month/{id}")
+    suspend fun getPrediction6Month(
+        @Path("id") stockId: Int
+    ): Response<StockPrice>
 }
