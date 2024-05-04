@@ -174,7 +174,7 @@ fun StockDetailPage(
                     heading = "Kasım",
                     subHeading = "Total Sales Today",
                     valueText = prices1week.toString(),
-                    percentage = ((prices1week - currentValue) / currentValue).toInt(),
+                    percentage = (((prices1week - currentValue) / currentValue) * 100).toInt(),
                     color = when (data1week.data.stockResultSentiment) {
                         "Low" -> Color.Red
                         "Medium" -> Color.Yellow
@@ -200,7 +200,7 @@ fun StockDetailPage(
                     heading = "Aralık",
                     subHeading = "Total Sales Today",
                     valueText = prices1month.toString(),
-                    percentage = ((prices1month - currentValue) / currentValue).toInt(),
+                    percentage = (((prices1month - currentValue) / currentValue) * 100).toInt(),
                     color = when (data1month.data.stockResultSentiment) {
                         "Low" -> Color.Red
                         "Medium" -> Color.Yellow
@@ -226,7 +226,7 @@ fun StockDetailPage(
                     heading = "Şubat",
                     subHeading = "Total Sales Today",
                     valueText = prices3month.toString(),
-                    percentage = ((prices3month - currentValue) / currentValue).toInt(),
+                    percentage = (((prices3month - currentValue) / currentValue) * 100).toInt(),
                     color = when (data3month.data.stockResultSentiment) {
                         "Low" -> Color.Red
                         "Medium" -> Color.Yellow
@@ -252,7 +252,7 @@ fun StockDetailPage(
                     heading = "Mayıs",
                     subHeading = "Total Sales Today",
                     valueText = prices6month.toString(),
-                    percentage = ((prices6month - currentValue) / currentValue).toInt(),
+                    percentage = (((prices6month - currentValue) / currentValue) * 100).toInt(),
                     color = when (data6month.data.stockResultSentiment) {
                         "Low" -> Color.Red
                         "Medium" -> Color.Yellow

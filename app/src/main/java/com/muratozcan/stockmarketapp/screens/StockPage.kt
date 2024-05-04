@@ -146,11 +146,8 @@ fun Crypto(stock: Stock, horizontal: Boolean = false, navController: NavControll
             Spacer(modifier = Modifier.width(10.dp))
         }
         Column(horizontalAlignment = Alignment.End) {
-            Text("${((stock.stockPrice * 100).roundToInt()) / 100.0}₺")
-            Spacer(modifier = Modifier.height(2.dp))
-            val percent = ((stock.stockPrice * 100).roundToInt()) / 100.0
-            val textColor = if (percent >= 0) Green else Red
-            Text(text = "${percent}%", color = textColor)
+            Text("${((stock.stockPrice * 100).roundToInt()) / 100.0} " +
+                    "₺", color = Color.White, fontSize = 20.sp)
         }
 
     }
