@@ -107,7 +107,7 @@ fun LoginPage(navController: NavController, viewModel: LoginViewModel = viewMode
                         .padding(top = 130.dp)
                         .fillMaxWidth(),
                     style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = MaterialTheme.colorScheme.outline,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 SimpleOutlinedTextFieldSample(email, onChange = { newEmail -> email = newEmail })
@@ -115,7 +115,7 @@ fun LoginPage(navController: NavController, viewModel: LoginViewModel = viewMode
                 Spacer(modifier = Modifier.padding(3.dp))
                 SimpleOutlinedPasswordTextField(password, onChange = { newPassword -> password = newPassword })
 
-                val gradientColor = listOf(Color(0xFF484BF1), Color(0xFF673AB7))
+                val gradientColor = listOf(MaterialTheme.colorScheme.onBackground, MaterialTheme.colorScheme.surface)
                 val cornerRadius = 16.dp
 
 
@@ -238,7 +238,7 @@ fun SimpleOutlinedTextFieldSample(text: String, onChange: (String) -> Unit) {
         shape = RoundedCornerShape(topEnd =12.dp, bottomStart =12.dp),
         label = {
             Text("Email Address",
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.outline,
                 style = MaterialTheme.typography.labelMedium,
             ) },
         placeholder = { Text(text = "Email Address") },
@@ -273,7 +273,7 @@ fun SimpleOutlinedPasswordTextField(text: String, onChange: (String) -> Unit) {
         shape = RoundedCornerShape(topEnd =12.dp, bottomStart =12.dp),
         label = {
             Text("Password",
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.outline,
                 style = MaterialTheme.typography.labelMedium,
             ) },
         visualTransformation =

@@ -106,7 +106,7 @@ fun Crypto(stock: Stock, horizontal: Boolean = false, navController: NavControll
                 RoundedCornerShape(8.dp)
             )
             .clickable {
-                navController.navigate("stock_detail_page/${stock.stockId}/${stock.stockName}"){
+                navController.navigate("stock_detail_page/${stock.stockId}/${stock.stockName}/${stock.stockPrice}"){
                 }
             }
             .background(MaterialTheme.colorScheme.outline)

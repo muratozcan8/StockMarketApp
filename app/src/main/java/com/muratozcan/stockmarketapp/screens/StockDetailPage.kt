@@ -1,5 +1,6 @@
 package com.muratozcan.stockmarketapp.screens
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -26,7 +27,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
@@ -34,11 +34,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -54,10 +51,8 @@ import androidx.navigation.NavController
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
 import com.muratozcan.stockmarketapp.models.BaseModel
-import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,7 +60,8 @@ fun StockDetailPage(
     navController: NavController,
     viewModel: StockDetailViewModel,
     stockId: Int,
-    stockName: String
+    stockName: String,
+    stockPrice: Float
 ) {
 
     LaunchedEffect(Unit) {
@@ -161,25 +157,19 @@ fun StockDetailPage(
         AnimatedVisibility(visible = price1week is BaseModel.Success) {
             val data1week = price1week as BaseModel.Success
             val prices1week = data1week.data.selectedPrice
+            Log.e("Stock", data1week.data.stockNameAndPrice + " " + stockPrice)
 
-            val parts = data1week.data.stockNameAndPrice.split(" ")
-            var valueStr = parts.getOrNull(1)
-            if (valueStr != null) {
-                valueStr = valueStr!!.substring(1, valueStr!!.length - 1)
-            }
-            val currentValue = valueStr?.toDoubleOrNull()
-
-            if (currentValue != null) {
+            if (stockPrice != null) {
                 ProfileInfoCard(
                     heading = "Kasım",
                     subHeading = "Total Sales Today",
                     valueText = prices1week.toString(),
-                    percentage = (((prices1week - currentValue) / currentValue) * 100).toInt(),
+                    percentage = (((prices1week - stockPrice) / stockPrice) * 100).toInt(),
                     color = when (data1week.data.stockResultSentiment) {
                         "Low" -> Color.Red
                         "Medium" -> Color.Yellow
                         else -> Color.Green },
-                    isIncreasing = currentValue < prices1week
+                    isIncreasing = stockPrice < prices1week
                 )
             }
         }
@@ -188,24 +178,17 @@ fun StockDetailPage(
             val data1month = price1month as BaseModel.Success
             val prices1month = data1month.data.selectedPrice
 
-            val parts = data1month.data.stockNameAndPrice.split(" ")
-            var valueStr = parts.getOrNull(1)
-            if (valueStr != null) {
-                valueStr = valueStr!!.substring(1, valueStr!!.length - 1)
-            }
-            val currentValue = valueStr?.toDoubleOrNull()
-
-            if (currentValue != null) {
+            if (stockPrice != null) {
                 ProfileInfoCard(
                     heading = "Aralık",
                     subHeading = "Total Sales Today",
                     valueText = prices1month.toString(),
-                    percentage = (((prices1month - currentValue) / currentValue) * 100).toInt(),
+                    percentage = (((prices1month - stockPrice) / stockPrice) * 100).toInt(),
                     color = when (data1month.data.stockResultSentiment) {
                         "Low" -> Color.Red
                         "Medium" -> Color.Yellow
                         else -> Color.Green },
-                    isIncreasing = currentValue < prices1month
+                    isIncreasing = stockPrice < prices1month
                 )
             }
         }
@@ -214,24 +197,17 @@ fun StockDetailPage(
             val data3month = price3month as BaseModel.Success
             val prices3month = data3month.data.selectedPrice
 
-            val parts = data3month.data.stockNameAndPrice.split(" ")
-            var valueStr = parts.getOrNull(1)
-            if (valueStr != null) {
-                valueStr = valueStr!!.substring(1, valueStr!!.length - 1)
-            }
-            val currentValue = valueStr?.toDoubleOrNull()
-
-            if (currentValue != null) {
+            if (stockPrice != null) {
                 ProfileInfoCard(
                     heading = "Şubat",
                     subHeading = "Total Sales Today",
                     valueText = prices3month.toString(),
-                    percentage = (((prices3month - currentValue) / currentValue) * 100).toInt(),
+                    percentage = (((prices3month - stockPrice) / stockPrice) * 100).toInt(),
                     color = when (data3month.data.stockResultSentiment) {
                         "Low" -> Color.Red
                         "Medium" -> Color.Yellow
                         else -> Color.Green },
-                    isIncreasing = currentValue < prices3month
+                    isIncreasing = stockPrice < prices3month
                 )
             }
         }
@@ -240,24 +216,17 @@ fun StockDetailPage(
             val data6month = price6month as BaseModel.Success
             val prices6month = data6month.data.selectedPrice
 
-            val parts = data6month.data.stockNameAndPrice.split(" ")
-            var valueStr = parts.getOrNull(1)
-            if (valueStr != null) {
-                valueStr = valueStr!!.substring(1, valueStr!!.length - 1)
-            }
-            val currentValue = valueStr?.toDoubleOrNull()
-
-            if (currentValue != null) {
+            if (stockPrice != null) {
                 ProfileInfoCard(
                     heading = "Mayıs",
                     subHeading = "Total Sales Today",
                     valueText = prices6month.toString(),
-                    percentage = (((prices6month - currentValue) / currentValue) * 100).toInt(),
+                    percentage = (((prices6month - stockPrice) / stockPrice) * 100).toInt(),
                     color = when (data6month.data.stockResultSentiment) {
                         "Low" -> Color.Red
                         "Medium" -> Color.Yellow
                         else -> Color.Green },
-                    isIncreasing = currentValue < prices6month
+                    isIncreasing = stockPrice < prices6month
                 )
             }
         }

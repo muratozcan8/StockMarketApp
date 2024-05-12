@@ -46,13 +46,16 @@ class MainActivity : ComponentActivity() {
             composable("register_page", content = { RegisterPage(navController = navController, viewModel = registerViewModel) })
             composable("stock_page", content = { StockPage(navController = navController, viewModel = stockViewModel) })
             composable(
-                "stock_detail_page/{stockId}/{stockName}",
+                "stock_detail_page/{stockId}/{stockName}/{stockPrice}",
                 arguments = listOf(
                     navArgument("stockId") {
                         type = NavType.IntType
                     },
                     navArgument("stockName") {
                         type = NavType.StringType
+                    },
+                    navArgument("stockPrice") {
+                        type = NavType.FloatType
                     }
                 )
             ) {
@@ -60,7 +63,8 @@ class MainActivity : ComponentActivity() {
                     navController = navController,
                     viewModel = stockDetailViewModel,
                     stockId = it.arguments?.getInt("stockId") ?: 1,
-                    stockName = it.arguments?.getString("stockName") ?: ""
+                    stockName = it.arguments?.getString("stockName") ?: "",
+                    stockPrice = it.arguments?.getFloat("stockPrice") ?: 0.0f
                 )
             }
         })

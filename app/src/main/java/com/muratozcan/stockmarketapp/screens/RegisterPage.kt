@@ -111,7 +111,7 @@ fun RegisterPage(navController: NavController, viewModel: RegisterViewModel = vi
                         .padding(top = 130.dp)
                         .fillMaxWidth(),
                     style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = MaterialTheme.colorScheme.outline,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 RegisterName(name, onChange = { newName -> name = newName })
@@ -128,7 +128,7 @@ fun RegisterPage(navController: NavController, viewModel: RegisterViewModel = vi
                 Spacer(modifier = Modifier.padding(3.dp))
                 RegisterPasswordConfirm(confirmPassword, onChange = { newConfirmPassword -> confirmPassword = newConfirmPassword })
 
-                val gradientColor = listOf(Color(0xFF484BF1), Color(0xFF673AB7))
+                val gradientColor = listOf(MaterialTheme.colorScheme.onBackground, MaterialTheme.colorScheme.surface)
                 val cornerRadius = 16.dp
 
                 Spacer(modifier = Modifier.padding(10.dp))
@@ -250,7 +250,7 @@ fun RegisterName(text: String, onChange: (String) -> Unit) {
         shape = RoundedCornerShape(topEnd =12.dp, bottomStart =12.dp),
         label = {
             Text("Name",
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.outline,
                 style = MaterialTheme.typography.labelMedium,
             ) },
         placeholder = { Text(text = "Name") },
@@ -285,7 +285,7 @@ fun RegisterUsername(text: String, onChange: (String) -> Unit) {
         shape = RoundedCornerShape(topEnd =12.dp, bottomStart =12.dp),
         label = {
             Text("Username",
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.outline,
                 style = MaterialTheme.typography.labelMedium,
             ) },
         placeholder = { Text(text = "Username") },
@@ -320,7 +320,7 @@ fun RegisterEmail(text: String, onChange: (String) -> Unit) {
         shape = RoundedCornerShape(topEnd =12.dp, bottomStart =12.dp),
         label = {
             Text("Email Address",
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.outline,
                 style = MaterialTheme.typography.labelMedium,
             ) },
         placeholder = { Text(text = "Email Address") },
@@ -355,7 +355,7 @@ fun RegisterPassword(text: String, onChange: (String) -> Unit) {
         shape = RoundedCornerShape(topEnd =12.dp, bottomStart =12.dp),
         label = {
             Text("Password",
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.outline,
                 style = MaterialTheme.typography.labelMedium,
             ) },
         visualTransformation =
@@ -399,7 +399,7 @@ fun RegisterPasswordConfirm(text: String, onChange: (String) -> Unit) {
         shape = RoundedCornerShape(topEnd =12.dp, bottomStart =12.dp),
         label = {
             Text("Confirm Password",
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.outline,
                 style = MaterialTheme.typography.labelMedium,
             ) },
         visualTransformation =
